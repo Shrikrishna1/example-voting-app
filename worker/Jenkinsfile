@@ -3,29 +3,34 @@ pipeline
     agent any
 
     tools {
-        maven 'maven 3.6.1'
+        maven 'Maven 3.6.1'
     }
 
-    stage('build') {
-        steps {
-            echo 'Compiling worker app'
-            dir('worker') {
-                sh 'mvn compile'
+    stages {
+
+        stage('build') {
+            steps {
+                echo 'Compiling worker app'
+                dir('worker') {
+                    sh 'mvn compile'
+                }
             }
         }
+
+        stage(two) {
+            steps {
+                echo 'Running Unit Tets on worker app'
+            }
+        }
+
+        stage(three) {
+            steps {
+                echo 'Packaging worker app'
+            }
+        }
+
     }
 
-    stage(two) {
-        steps {
-            echo 'Running Unit Tets on worker app'
-        }
-    }
-
-    stage(three) {
-        steps {
-            echo 'Packaging worker app'
-        }
-    }
 
     post {
         always {
