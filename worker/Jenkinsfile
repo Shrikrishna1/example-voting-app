@@ -1,44 +1,35 @@
-pipeline {
+pipeline
+{
     agent any
 
-    tools{
-
+    tools {
         maven 'maven 3.6.1'
-        
     }
 
-    stages("build"){
-
-        steps{
-
+    stage('build') {
+        steps {
             echo 'Compiling worker app'
-            dir('worker'){
+            dir('worker') {
                 sh 'mvn compile'
+            }
         }
-
-
     }
 
-    stage(two){
-
-        steps{ echo 'Running Unit Tets on worker app'
-     }
-
-    stage(three){
-
-       steps{
-            echo 'Packaging worker app' 
-            
-               }
-
-                     }
-
-                      }
-
-                post{ 
-                    
-                       always{ 
-                           echo 'Building multibranch pipeline for worker is completed..'
-                       }
-                }
+    stage(two) {
+        steps {
+            echo 'Running Unit Tets on worker app'
+        }
     }
+
+    stage(three) {
+        steps {
+            echo 'Packaging worker app'
+        }
+    }
+
+    post {
+        always {
+            echo 'Building multibranch pipeline for worker is completed..'
+        }
+    }
+}
