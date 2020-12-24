@@ -15,6 +15,8 @@ pipeline {
             dir('worker'){
                 sh 'mvn compile'
         }
+            
+      }
 
 
     }
@@ -39,9 +41,9 @@ pipeline {
                     
                        always{
                            
-                           echo 'Building multibranch pipeline for worker is completed..'
+                           echo 'Building multibranch pipeline for worker is completed'
                        }
                 }
     }
     
-}
+
