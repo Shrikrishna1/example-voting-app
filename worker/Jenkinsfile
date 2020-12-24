@@ -15,11 +15,12 @@ pipeline {
             dir('worker'){
                 sh 'mvn compile'
         }
+     }
+        
+    }      
+        
 
-
-    }
-
-    }
+    
 
     stage(two){
 
@@ -29,6 +30,7 @@ pipeline {
     stage(three){
 
        steps{
+           
             echo 'Packaging worker app' 
             
                }
@@ -41,9 +43,9 @@ pipeline {
                     
                        always{ 
                            
-                           echo 'Building multibranch pipeline for worker is completed..'
+                           echo 'Building multibranch pipeline for worker is completed'
                        }
                 }
             
     }
-}
+
