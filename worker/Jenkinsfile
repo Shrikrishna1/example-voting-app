@@ -13,7 +13,6 @@ pipeline
                 sh 'mvn compile'
             }
         }
-<<<<<<< HEAD
     }
 
     stage(two) {
@@ -34,37 +33,3 @@ pipeline
         }
     }
 }
-=======
-            
-      }
-
-
-    }
-
-    stage(two){
-
-        steps{ echo 'Running Unit Tets on worker app'
-     }
-
-    stage(three){
-
-       steps{
-            echo 'Packaging worker app' 
-            
-               }
-
-         }
-
-    }
-
-             post{ 
-                    
-                       always{
-                           
-                           echo 'Building multibranch pipeline for worker is completed'
-                       }
-                }
-    }
-    
-
->>>>>>> 94822bcf4fe3ac148412ae3ca92bb04e666f9442
