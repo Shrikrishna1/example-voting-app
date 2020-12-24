@@ -19,6 +19,8 @@ pipeline {
 
     }
 
+    }
+
     stage(two){
 
         steps{ echo 'Running Unit Tets on worker app'
@@ -31,9 +33,9 @@ pipeline {
             
                }
 
-                     }
+    }  
 
-                      }
+    }     
 
                 post{ 
                     
@@ -41,4 +43,5 @@ pipeline {
                            echo 'Building multibranch pipeline for worker is completed..'
                        }
                 }
+            
     }
