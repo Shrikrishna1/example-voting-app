@@ -1,5 +1,6 @@
 pipeline
 {
+<<<<<<< HEAD
     agent{
 
     docker {
@@ -9,6 +10,14 @@ pipeline
 
 }
 
+=======
+    agent any
+
+    tools {
+        maven 'Maven 3.6.1'
+    }
+
+>>>>>>> 930f524d3abd0c04eb4f00db158976e505f970b6
     stages {
 
         stage('build') {
@@ -20,6 +29,7 @@ pipeline
             }
         }
 
+<<<<<<< HEAD
         stage(two) {
             steps {
                 echo 'Running Unit Tets on worker app'
@@ -29,6 +39,24 @@ pipeline
         stage(three) {
             steps {
                 echo 'Packaging worker app'
+=======
+        stage(test) {
+            steps {
+                echo 'Running Unit Tets on worker app'
+                dir('worker') {
+                    sh 'mvn clean test'
+
+                }
+            }
+        }
+
+        stage(package) {
+            steps {
+                echo 'Packaging worker app'
+                dir('worker') {
+                    sh 'mvn package -DskipTests'
+                }
+>>>>>>> 930f524d3abd0c04eb4f00db158976e505f970b6
             }
         }
 
@@ -37,7 +65,13 @@ pipeline
 
     post {
         always {
+<<<<<<< HEAD
             echo 'Building multibranch pipeline for worker is completed..'
+=======
+
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            echo 'pipeline for worker is  completed..'
+>>>>>>> 930f524d3abd0c04eb4f00db158976e505f970b6
         }
     }
 }
