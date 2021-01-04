@@ -1,46 +1,67 @@
 pipeline {
+
 agent none
+
 stages {
+
 stage('build') {
 agent {
+
 docker {
 image 'maven:3.6.1-jdk-8-slim'
 args '-v $HOME/.m2:/root/.m2'
 }
+
 }
 
 steps {
 echo 'building worker app'
 dir('worker') {
+
 sh 'mvn compile'
+
 }
+
 }
+
 }
 stage('test') {
+
 agent {
 
  {
+
   image 'maven:3.6.1-jdk-8-slim'
   args '-v $HOME/.m2:/root/.m2'
 
  }
 
 }
+
 steps {
+
 echo 'running unit tests on worker app'
-dir('worker') {
+
+dir('worker')  {
+
 sh 'mvn clean test'
+
 }
 
 }
 
 }
 stage('package') {
+
 agent {
+
 docker {
+
 image 'maven:3.6.1-jdk-8-slim'
 args '-v $HOME/.m2:/root/.m2'
+
 }
+
 }
 steps {
 echo 'packaging worker app into a jarfile'
@@ -50,8 +71,10 @@ archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
 }
 }
 }
-stage('docker-package') {
+stage('docker-package') 
+{
 agent any
+
 steps {
 echo 'Packaging worker app with docker'
 script {
