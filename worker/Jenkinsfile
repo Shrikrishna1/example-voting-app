@@ -28,8 +28,11 @@ sh 'mvn compile'
 }
 
 stage('test') {
+/* groovylint-disable-next-line ClosureStatementOnOpeningLineOfMultipleLineClosure */
 agent {      {
+       /* groovylint-disable-next-line DuplicateStringLiteral */
        image 'maven:3.6.1-jdk-8-slim'
+       /* groovylint-disable-next-line DuplicateStringLiteral */
        args '-v $HOME/.m2:/root/.m2'
 
       }
