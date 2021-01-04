@@ -1,13 +1,10 @@
 pipeline
 {
-    agent{
+    agent any
 
-    docker {
-        image 'maven:3.6.1-jdk-8-slim'
-        args '-v $HOME/.m2:/root/.m2'
+    tools {
+        maven 'Maven 3.6.1'
     }
-
-}
 
     stages {
 
@@ -20,15 +17,22 @@ pipeline
             }
         }
 
-        stage(two) {
+        stage(test) {
             steps {
                 echo 'Running Unit Tets on worker app'
+                dir('worker') {
+                    sh 'mvn clean test'
+
+                }
             }
         }
 
-        stage(three) {
+        stage(package) {
             steps {
                 echo 'Packaging worker app'
+                dir('worker') {
+                    sh 'mvn package -DskipTests'
+                }
             }
         }
 
@@ -37,7 +41,12 @@ pipeline
 
     post {
         always {
-            echo 'Building multibranch pipeline for worker is completed..'
+
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            echo 'pipeline for worker is  completed..'
         }
     }
 }
+
+
+    
