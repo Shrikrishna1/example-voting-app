@@ -1,3 +1,4 @@
+/* groovylint-disable-next-line CompileStatic */
 pipeline {
 
 agent none
@@ -67,7 +68,7 @@ steps {
     dir('worker') {
     sh 'mvn package -DskipTests'
     archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
-}
+    }
 
 }
 
@@ -87,7 +88,7 @@ script {
     workerImage.push()
     workerImage.push('latest')
 
-}
+    }
 
 }
 
